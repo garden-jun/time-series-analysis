@@ -153,3 +153,24 @@ proc sgplot;
 	cards; << 그냥 직접 데이터 입력
 	infile << 외부데이터 입력.
 	**/
+
+
+
+
+	/** FIGURE 1.4 : 시작 연도를 가져오는 방법   **/
+data fig1_4;
+	infile 'c:\data\depart.txt';
+	input z @@;
+	t = _n_;
+
+/*	logz = log(z);*/
+/*	date = intnx('month', '1jan81'd, _n_-1);	* 자료개수, 자동변수(SAS 의기능);*/
+/*	format date monyy.;*/
+/*	x=2.701573+0.000409*date; */
+	run;
+
+proc print data=fig1_4; run;
+
+proc sgplot;
+	series x=t y=logz/ lineattrs=(color=blue);
+	series x=date y=x/ lineattrs=(color=black); run;
